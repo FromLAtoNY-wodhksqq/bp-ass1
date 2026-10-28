@@ -1,0 +1,101 @@
+Actor: AI development automation, not student final/manual results.
+
+backend-express: npm test; exit=0
+
+> jwt-board-express@1.0.0 test
+> node --test test/*.test.js
+
+▶ public and protected post API contracts
+  ✔ empty public list and safe ID validation (12.915542ms)
+  ✔ missing or invalid tokens cannot write (3.5725ms)
+  ✔ real Alice login verifies 201 and Location plus public detail (3.807041ms)
+  ✔ missing, non-string, blank, oversized and extra properties are rejected (28.315375ms)
+  ✔ malformed JSON becomes a JSON 400 error (1.392875ms)
+  ✔ existence and ownership precede body checks with real JWTs (2.448542ms)
+  ✔ update returns 200 and delete returns 204 without any body (2.91575ms)
+✔ public and protected post API contracts (193.628ms)
+▶ JWT issuance and configuration
+  ✔ hex is decoded to 32 bytes and default claims verify (3.051125ms)
+  ✔ empty, malformed, placeholder and simple example keys are refused (4.760792ms)
+  ✔ TTL is strict and custom TTL is used in exp (2.319209ms)
+  ✔ login input requires exactly email and original password (5.589333ms)
+  ✔ HTTP login issues only for valid accounts and authenticates me (254.264708ms)
+  ✔ invalid configuration prevents the actual server from starting (540.954917ms)
+  ✔ setup creates private settings without printing secrets or overwriting (99.207708ms)
+✔ JWT issuance and configuration (913.201291ms)
+▶ JWT protection and ownership with unchanged data on failures
+  ✔ two accounts login, me is public data and author comes from JWT (140.994375ms)
+  ✔ all four protected APIs require a well-formed Bearer header (28.945334ms)
+  ✔ signed invalid claims, signatures and algorithms fail on every protected API (70.402ms)
+  ✔ authentication, existence, owner and input precedence is preserved (3.960584ms)
+  ✔ unexpected fields and malformed data never change persisted posts (15.575458ms)
+  ✔ actual expiration is TOKEN_EXPIRED on every protected API (977.531542ms)
+  ✔ both owners can update and delete their own posts (14.964583ms)
+✔ JWT protection and ownership with unchanged data on failures (1265.300333ms)
+✔ actual server process restart preserves SQLite data and authors (966.282042ms)
+▶ SQLite storage and credentials
+  ✔ database and table are created without an existing file (1.730125ms)
+  ✔ bound values remain literal and public fields match the contract (259.746958ms)
+  ✔ updates persist and preserve author and creation time (159.821375ms)
+  ✔ failed file save restores memory and leaves persisted data unchanged (1.28275ms)
+  ✔ deletes persist across a new Node process (145.869792ms)
+  ✔ Alice and Bob accept only their exact password (279.844542ms)
+  ✔ public users do not expose hashes and cannot mutate stored accounts (0.084ms)
+✔ SQLite storage and credentials (849.920041ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 33
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1587.178833
+
+frontend-react: npm test; exit=0
+
+> jwt-board-react@1.0.0 test
+> node --test test/*.test.js
+
+▶ memory session and API requests
+  ✔ guest has no Authorization; login stores memory and notifies (44.237667ms)
+  ✔ public reads omit token; protected calls send Bearer and JSON (1.917041ms)
+  ✔ 204 delete does not parse JSON (0.310584ms)
+  ✔ 400, 403 and 404 retain session while 401 clears and notifies (3.92025ms)
+  ✔ logout clears permissions and late successful login cannot restore it (0.79625ms)
+  ✔ late 401 for old session cannot log out a new user (0.888292ms)
+  ✔ non-JSON 401 still clears session and malformed success cannot report success (0.832042ms)
+  ✔ network errors propagate without clearing valid memory session (0.500834ms)
+✔ memory session and API requests (56.202667ms)
+▶ screen error policy and request outcome messages
+  ✔ 400 explains correction and only 404 requests list refresh (1.491291ms)
+  ✔ 401 codes have distinct login guidance and unknown codes fall back safely (0.102167ms)
+  ✔ failed operations never announce success and always release busy state (0.21875ms)
+  ✔ success follows the awaited operation; cancelled or stale work stays silent (0.126209ms)
+  ✔ failure in a follow-up refresh does not become a save success message (0.078875ms)
+✔ screen error policy and request outcome messages (3.541375ms)
+✔ frontend API connects to real Express with an isolated SQLite file (226.289916ms)
+✔ React initial guest and logged-in markup (126.919333ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 521.791375
+
+frontend-react: npm run build; exit=0
+
+> jwt-board-react@1.0.0 build
+> vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 19 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.40 kB │ gzip:  0.30 kB
+dist/assets/index-BGL4Bx0t.css    1.25 kB │ gzip:  0.59 kB
+dist/assets/index-DuZWBKky.js   228.70 kB │ gzip: 72.03 kB
+
+✓ built in 133ms
